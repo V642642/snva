@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addExpense, addIncome } from "../../redux/ducks/TodoReducer";
 
 export default function Contact() {
   const cards = useSelector((state) => state.addContactSlice.value);
-  // const [] = useState("All");
+  const [filters , setFilters] = useState("All");
+
   // console.log(cards);
   const dispatch = useDispatch();
 
@@ -95,8 +96,30 @@ export default function Contact() {
             </button>
           </form>
         </div>
-        <div className="w-6/12 flex mt-20 py-6 gap-5 items-center justify-center flex-col border-t border-black ">
-          {cards.map((data) => (
+        <div className="w-6/12 flex mt-20 py-6 gap-5 items-start justify-center  border-t border-black ">
+          <div className="flex flex-col ">
+            <label className="flex items-center gap-2 text-[18px] ">
+              <input type="radio" name="filter" value="All" onChange={e => setFilters(e.target.value)} /> All
+            </label>
+            <label className="flex items-center gap-2 text-[18px] ">
+              <input type="radio" name="filter" value="EXPENSE" onChange={e => setFilters(e.target.value)}  /> Debit
+            </label>
+            <label className="flex items-center gap-2 text-[18px] ">
+              <input type="radio" name="filter" value="INCOME" onChange={e => setFilters(e.target.value)}  /> Credit
+            </label>
+          </div>
+          <div className="w-full flex items-center justify-center flex-col gap-5">
+          {cards.filter(data => {
+            if(filters === "All"){
+              return data
+            }else if(filters === "EXPENSE"){
+              return data.type === 'EXPENSE'
+            }else if(filters === "INCOME"){
+              return data.type === 'INCOME'
+            }else{
+              return data
+            }
+          }).map((data) => (
             <div
               className={`w-full border rounded-md bg-white px-2 py-2 flex items-center flex-row justify-between border-r-4  ${
                 data.type === "EXPENSE" ? "border-red-700" : "border-green-700"
@@ -109,6 +132,8 @@ export default function Contact() {
               <p>{data.type === 'EXPENSE' ? data.amount * -1 : data.amount}</p>
             </div>
           ))}
+          </div>
+          
         </div>
       </div>
     </div>
