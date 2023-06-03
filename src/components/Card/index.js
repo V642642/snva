@@ -36,11 +36,11 @@ export default function Contact() {
           <p className="w-full text-[40px] text-center">{Number(cards
                 .filter((data) => data.type === "INCOME")
                 .reduce((accumulator, value, index, array) => {
-                  return accumulator + value.amount;
+                  return Number(accumulator) + Number(value.amount);
                 }, 0)) - Number(cards
                   .filter((data) => data.type === "EXPENSE")
                   .reduce((accumulator, value, index, array) => {
-                    return accumulator + value.amount * -1;
+                    return Number(accumulator) + Number(value.amount * -1);
                   }, 0))}</p>
           <div className="w-full flex items-center justify-center  flex-col rounded-lg bg-blue-400 py-5 px-4">
             <p className="text-[20px] font-medium">INCOME</p>
@@ -48,7 +48,7 @@ export default function Contact() {
               {cards
                 .filter((data) => data.type === "INCOME")
                 .reduce((accumulator, value, index, array) => {
-                  return accumulator + value.amount;
+                  return Number(accumulator) + Number(value.amount);
                 }, 0)}
             </p>
           </div>
@@ -58,7 +58,7 @@ export default function Contact() {
             {cards
                 .filter((data) => data.type === "EXPENSE")
                 .reduce((accumulator, value, index, array) => {
-                  return accumulator + value.amount * -1;
+                  return Number(accumulator) + Number(value.amount * -1);
                 }, 0)}
             </p>
           </div>
