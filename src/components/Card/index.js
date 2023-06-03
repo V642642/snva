@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addExpense, addIncome } from "../../redux/ducks/TodoReducer";
 
 export default function Contact() {
   const cards = useSelector((state) => state.addContactSlice.value);
-  const [] = useState("All");
-  console.log(cards);
+  // const [] = useState("All");
+  // console.log(cards);
   const dispatch = useDispatch();
 
   const { handleSubmit, register, reset } = useForm();
